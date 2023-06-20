@@ -5,25 +5,7 @@
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[allow(non_camel_case_types)]
 pub enum SpecId {
-    FRONTIER = 0,         // Frontier	            0
-    FRONTIER_THAWING = 1, // Frontier Thawing       200000
-    HOMESTEAD = 2,        // Homestead	            1150000
-    DAO_FORK = 3,         // DAO Fork	            1920000
-    TANGERINE = 4,        // Tangerine Whistle	    2463000
-    SPURIOUS_DRAGON = 5,  // Spurious Dragon        2675000
-    BYZANTIUM = 6,        // Byzantium	            4370000
-    CONSTANTINOPLE = 7,   // Constantinople         7280000 is overwritten with PETERSBURG
-    PETERSBURG = 8,       // Petersburg             7280000
-    ISTANBUL = 9,         // Istanbul	            9069000
-    MUIR_GLACIER = 10,    // Muir Glacier	        9200000
-    BERLIN = 11,          // Berlin	                12244000
-    LONDON = 12,          // London	                12965000
-    ARROW_GLACIER = 13,   // Arrow Glacier	        13773000
-    GRAY_GLACIER = 14,    // Gray Glacier	        15050000
-    MERGE = 15,           // Paris/Merge	        TBD (Depends on difficulty)
-    SHANGHAI = 16,
-    CANCUN = 17,
-    LATEST = 18,
+    LATEST = 0
 }
 
 impl SpecId {
@@ -37,19 +19,6 @@ pub use SpecId::*;
 impl From<&str> for SpecId {
     fn from(name: &str) -> Self {
         match name {
-            "Frontier" => SpecId::FRONTIER,
-            "Homestead" => SpecId::HOMESTEAD,
-            "Tangerine" => SpecId::TANGERINE,
-            "Spurious" => SpecId::SPURIOUS_DRAGON,
-            "Byzantium" => SpecId::BYZANTIUM,
-            "Constantinople" => SpecId::CONSTANTINOPLE,
-            "Petersburg" => SpecId::PETERSBURG,
-            "Istanbul" => SpecId::ISTANBUL,
-            "MuirGlacier" => SpecId::MUIR_GLACIER,
-            "Berlin" => SpecId::BERLIN,
-            "London" => SpecId::LONDON,
-            "Merge" => SpecId::MERGE,
-            "Shanghai" => SpecId::SHANGHAI,
             _ => SpecId::LATEST,
         }
     }
@@ -81,22 +50,4 @@ macro_rules! spec {
     };
 }
 
-spec!(FRONTIER, FrontierSpec);
-// FRONTIER_THAWING no EVM spec change
-spec!(HOMESTEAD, HomesteadSpec);
-// DAO_FORK no EVM spec change
-spec!(TANGERINE, TangerineSpec);
-spec!(SPURIOUS_DRAGON, SpuriousDragonSpec);
-spec!(BYZANTIUM, ByzantiumSpec);
-// CONSTANTINOPLE was overriden with PETERSBURG
-spec!(PETERSBURG, PetersburgSpec);
-spec!(ISTANBUL, IstanbulSpec);
-// MUIR_GLACIER no EVM spec change
-spec!(BERLIN, BerlinSpec);
-spec!(LONDON, LondonSpec);
-// ARROW_GLACIER no EVM spec change
-// GRAY_GLACIER no EVM spec change
-spec!(MERGE, MergeSpec);
-// MERGE_EOF is pending EVM change
-spec!(SHANGHAI, ShanghaiSpec);
 spec!(LATEST, LatestSpec);
